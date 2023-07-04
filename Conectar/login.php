@@ -18,12 +18,11 @@
     
     if($result = mysqli_query($conn,$sql1)){
         $row = mysqli_fetch_assoc($result);
-        if($resultado){
             if(password_verify($valida_senha,$row['Senha_Usuario'])){
                 
                 $_SESSION['autenticado']='SIM';
                 $userID = $_SESSION['id'] = $row['Id_Usuario'];                           
-                $_SESSION['email'] = $row['USERemail'];
+                $_SESSION['email'] = $_POST['USERemail'];
                 $_SESSION['senha'] = $_POST['USERpwd'];
                 $sql2 = "SELECT Primeiro_Nome_Usuario, Ultimo_Nome_Usuario FROM cc_priv_usuario WHERE id_usuario_usuario = '$userID'";
                 $resultado = mysqli_query($conn,$sql2);
@@ -40,6 +39,7 @@
             header('Location: erro_login.php');
             
         }
-    }
 
+// Fecha a conexão
+mysqli_close($conn);
 ?>
