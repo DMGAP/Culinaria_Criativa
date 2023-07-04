@@ -1,5 +1,6 @@
 <?php 
     include('conectar.php');
+    include('../Conta/conta.html').
     //variavel que verifica se a autenticação foi realizada
     $usuario_autenticado = false;
 
@@ -11,8 +12,13 @@
     $usuario_senha = null;
     $usuario_email =null;
 
-    $valida_usuario = password_hash($_POST['USERemail'], PASSWORD_DEFAULT);
-    $valida_senha = password_hash($_POST['USERpwd'], PASSWORD_DEFAULT);
+    $temp_user_email = $_POST['USERemail'];
+    var_dump($temp_user_email);
+    $valida_usuario = password_hash($temp_user_email, PASSWORD_DEFAULT);
+    $temp_user_senha = $_POST['USERpwd'];
+    var_dump($temp_user_senha);
+    $valida_senha = password_hash($temp_user_email, PASSWORD_DEFAULT);
+    
     $sql1 = "SELECT id_Usuario, Email_Usuario, Senha_Usuario FROM cc_usuario WHERE Email_Usuario = '$valida_usuario'";
     
     
@@ -31,7 +37,7 @@
                 header('Location: minhasReceitas.html');
                 
             }else{
-                echo"<p style='color:#FF0000'>Senha inválida>";
+                echo"<p style='color:#FF0000'>Senha inválida";
             }
         }
         else{        
